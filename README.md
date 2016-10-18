@@ -65,3 +65,26 @@ Creating a mock of `org.kohsuke.github.GHIssue` (https://github.com/kohsuke/gith
         at org.mockito.Mockito.mock(Mockito.java:1629)
         at org.mockito.Mockito.mock(Mockito.java:1542)
         ... 27 more
+
+and creating a mock of `org.kohsuke.github.GHRepository` results in:
+
+    java.lang.VerifyError: Bad type on operand stack
+    Exception Details:
+      Location:
+        org/kohsuke/github/GHRepository$MockitoMock$667330966.getId()Ljava/lang/String; @4: checkcast
+      Reason:
+        Type integer (current frame, stack[0]) is not assignable to 'java/lang/Object'
+      Current Frame:
+        bci: @4
+        flags: { }
+        locals: { 'org/kohsuke/github/GHRepository$MockitoMock$667330966' }
+        stack: { integer }
+      Bytecode:
+        0x0000000: 2ab6 003d c000 2eb0                    
+
+
+        at sun.reflect.GeneratedSerializationConstructorAccessor1.newInstance(Unknown Source)
+        at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+        at org.objenesis.instantiator.sun.SunReflectionFactoryInstantiator.newInstance(SunReflectionFactoryInstantiator.java:45)
+        at org.objenesis.ObjenesisBase.newInstance(ObjenesisBase.java:73)
+        at org.mockito.internal.creation.instance.ObjenesisInstantiator.newInstance(ObjenesisInstantiator.java:14)
